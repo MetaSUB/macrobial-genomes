@@ -27,19 +27,26 @@ def get_real_names():
 
 def parse_fasta_len(fastaf):
     tot_bases = 0
+    chrs = []
     with gzip.open(fastaf, mode='r') as ff:
         for line in ff:
             if line[0] != '>':
                 tot_bases += len(line)
-    return tot_bases
+            else:
+                chr_name = line[1:].split()[0]
+                chrs.append(chr_name)
+    return tot_bases, chrs
 
 
 def get_raw_genome_lengths():
     length_tbl = {}
+    chr_tbl = {}
     for fastaf in glob(GENOME_PATTERN):
         gname = fastaf.split('/')[-1].split('.')[0]
-        length_tbl[gname] = parse_fasta_len(fastaf)
-    return length_tbl
+        tot_bases, chrs = parse_fasta_len(fastaf)
+        length_tbl[gname] = tot_bases
+        chr_tbl[gname] = chrs
+    return length_tbl, chr_tbl
 
 
 def parse_m8_line(line):
@@ -71,18 +78,18 @@ def get_similar_stretches(sim_cutoff):
 
 def get_dissimilar_lengths(sim_cutoff=0.9):
     dis_tbl = {}
-    len_tbl = get_raw_genome_lengths()
+    len_tbl, chr_tbl = get_raw_genome_lengths()
     sim_tbl = get_similar_stretches(sim_cutoff)
     for gname, qlen in len_tbl.items():
         dis_len = sim_tbl[gname]
         dis_tbl[gname] = dis_len
-    return dis_tbl
+    return dis_tbl, chr_tbl
 
 
 @click.command()
 @click.option('-s', '--similarity', default=0.9)
 def main(similarity):
-    dis_tbl = get_dissimilar_lengths(sim_cutoff=similarity)
+    dis_tbl, chr_tbl = get_dissimilar_lengths(sim_cutoff=similarity)
     name_tbl = get_real_names()
     out_tbl = {}
     for gname, dis in dis_tbl.items():
@@ -90,6 +97,7 @@ def main(similarity):
         out_tbl[gname] = {
             'common_name': common_name,
             'effective_length': dis,
+            'chrs': chr_tbl[gname],
         }
     stdout.write(dumps(out_tbl))
 
