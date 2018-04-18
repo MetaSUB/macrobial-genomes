@@ -78,26 +78,27 @@ def get_similar_stretches(sim_cutoff):
     return sim_tbl
 
 
-def get_dissimilar_lengths(sim_cutoff=0.9):
+def get_dissimilar_lengths(len_tbl, sim_cutoff=0.9):
     dis_tbl = {}
-    len_tbl, chr_tbl = get_raw_genome_lengths()
     sim_tbl = get_similar_stretches(sim_cutoff)
     for gname, qlen in len_tbl.items():
         dis_len = sim_tbl[gname]
         dis_tbl[gname] = dis_len
-    return dis_tbl, chr_tbl
+    return dis_tbl
 
 
 @click.command()
 @click.option('-s', '--similarity', default=0.9)
 def main(similarity):
-    dis_tbl, chr_tbl = get_dissimilar_lengths(sim_cutoff=similarity)
+    len_tbl, chr_tbl = get_raw_genome_lengths()
+    dis_tbl = get_dissimilar_lengths(len_tbl, sim_cutoff=similarity)
     name_tbl = get_real_names()
     out_tbl = {}
     for gname, dis in dis_tbl.items():
         common_name = name_tbl[gname]
         out_tbl[gname] = {
             'common_name': common_name,
+            'raw_length': len_tbl[gname],
             'effective_length': dis,
             'chrs': chr_tbl[gname],
         }
