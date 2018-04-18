@@ -9,9 +9,9 @@ from sys import stdout
 from os.path import dirname
 
 
-GENOME_PATTERN = dirname(__file__) + '/100M_base_limited_genomes/*.100M'
-M8_PATTERN = dirname(__file__) + '/blast_tabulars/*.m8'
-GENOME_INFO = dirname(__file__) + 'macrobe_genomes.csv'
+GENOME_PATTERN = '100M_base_limited_genomes/*.100M'
+M8_PATTERN = 'blast_tabulars/*.m8'
+GENOME_INFO = 'macrobe_genomes.csv'
 
 
 def get_real_names():
@@ -20,7 +20,7 @@ def get_real_names():
         for line in gf:
             tkns = line.split(',')
             common_name = tkns[0]
-            gname = tkns[2].split('.')[0]
+            gname = tkns[2].split('.')[0].strip()
             name_tbl[gname] = common_name
     return name_tbl
 
@@ -30,10 +30,12 @@ def parse_fasta_len(fastaf):
     chrs = []
     with gzip.open(fastaf, mode='r') as ff:
         for line in ff:
+            line = line.strip()
             if line[0] != '>':
                 tot_bases += len(line)
             else:
                 chr_name = line[1:].split()[0]
+                print(chr_name)
                 chrs.append(chr_name)
     return tot_bases, chrs
 
