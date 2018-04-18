@@ -9,7 +9,7 @@ from sys import stdout
 from os.path import dirname
 
 
-GENOME_PATTERN = '100M_base_limited_genomes/*.100M'
+GENOME_PATTERN = '100M_base_limited_genomes/*.100M.unzip.fa'
 M8_PATTERN = 'blast_tabulars/*.m8'
 GENOME_INFO = 'macrobe_genomes.csv'
 
@@ -28,7 +28,7 @@ def get_real_names():
 def parse_fasta_len(fastaf):
     tot_bases = 0
     chrs = []
-    with gzip.open(fastaf, mode='r') as ff:
+    with open(fastaf) as ff:
         for line in ff:
             line = line.strip()
             if line[0] != '>':
