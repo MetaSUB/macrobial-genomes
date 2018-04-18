@@ -55,17 +55,29 @@ def parse_m8_line(line):
     perc_id = float(tkns[2])
     qstart = int(tkns[6])
     qend = int(tkns[7])
-    qlen = max(qend, qstart) - min(qend, qstart)
-    return perc_id, qlen
+    s, e = min(qend, qstart), max(qend, qstart)
+    return perc_id, s, e
 
 
 def len_of_similar_stretches(m8fname, sim_cutoff):
-    tot_bases = 0
+    sections = []
     with open(m8fname) as m8f:
         for line in m8f:
-            perc_id, qlen = parse_m8_line(line)
+            perc_id, start, end = parse_m8_line(line)
             if perc_id >= sim_cutoff:
-                tot_bases += qlen
+                sections.append((start, end))
+    sections = sorted(sections, key=lambda el: el[0])
+
+    tot_bases = 0
+    cur_start, cur_end = sections[0]
+    for start, end in sections[1:]:
+        if start <= cur_end:  # section overlaps
+            cur_end = end
+        else:  # sections do not overlap
+            tot_bases += cur_end - cur_start
+            cur_start, cur_end = start, end
+    tot_bases += cur_end - cur_start
+
     return tot_bases
 
 
@@ -81,7 +93,7 @@ def get_dissimilar_lengths(len_tbl, sim_cutoff=0.9):
     dis_tbl = {}
     sim_tbl = get_similar_stretches(sim_cutoff)
     for gname, qlen in len_tbl.items():
-        dis_len = sim_tbl[gname]
+        dis_len = qlen - sim_tbl[gname]
         dis_tbl[gname] = dis_len
     return dis_tbl
 
