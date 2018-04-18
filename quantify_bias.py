@@ -35,7 +35,6 @@ def parse_fasta_len(fastaf):
                 tot_bases += len(line)
             else:
                 chr_name = line[1:].split()[0]
-                print(chr_name)
                 chrs.append(chr_name)
     return tot_bases, chrs
 
