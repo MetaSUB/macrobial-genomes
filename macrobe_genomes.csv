@@ -30,3 +30,10 @@ rice, Oryza sativa Japonica Group, GCA_000005425.2, 02-feb-2005, ftp://ftp.ncbi.
 yam, Dioscorea rotundata, GCA_002240015.2, 28-jul-2017, ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/240/015/GCA_002240015.2_TDr96_F1_Pseudo_Chromosome_v1.0/GCA_002240015.2_TDr96_F1_Pseudo_Chromosome_v1.0_genomic.fna.gz
 wallaby, Notamacropus eugenii, GCA_000004035.1, 26-nov-2008, ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/004/035/GCA_000004035.1_Meug_1.1/GCA_000004035.1_Meug_1.1_genomic.fna.gz
 alligator, Alligator mississippiensis, GCA_000281125.4, 24-jul-2012, ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/281/125/GCA_000281125.4_ASM28112v4/GCA_000281125.4_ASM28112v4_genomic.fna.gz
+tobacco, Nicotianum tabacum, GCA_000715135.1, 29-may-2014, ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/715/135/GCA_000715135.1_Ntab-TN90/GCA_000715135.1_Ntab-TN90_genomic.fna.gz
+sorghum, Sorghum Bicolor, GCA_000003195.3, 7-apr-2017, ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/003/195/GCA_000003195.3_Sorghum_bicolor_NCBIv3/GCA_000003195.3_Sorghum_bicolor_NCBIv3_genomic.fna.gz
+irish moss, Chondrum Crispus, GCA_000350225.2, 8-mar-2014, ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/350/225/GCA_000350225.2_ASM35022v2/GCA_000350225.2_ASM35022v2_genomic.fna.gz
+apple, Malus Domesticas, GCA_000148765.2, 15-jun-2016, ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/148/765/GCA_000148765.2_MalDomGD1.0/GCA_000148765.2_MalDomGD1.0_genomic.fna.gz
+beet, Beta Vulgaris, GCA_000511025.2, 13-jun-2016, ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/511/025/GCA_000511025.2_RefBeet-1.2.2/GCA_000511025.2_RefBeet-1.2.2_genomic.fna.gz
+jujuba, Ziziphus jujuba, GCA_000826755.1, 14-jun-2016, ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/826/755/GCA_000826755.1_ZizJuj_1.1/GCA_000826755.1_ZizJuj_1.1_genomic.fna.gz
+cassava, Manihot esculenta, GCA_001659605.1, 16-jun-2016, ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/659/605/GCA_001659605.1_Manihot_esculenta_v6/GCA_001659605.1_Manihot_esculenta_v6_genomic.fna.gz
